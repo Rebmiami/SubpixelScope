@@ -10,6 +10,7 @@ event.register(event.tick, function()
         -- Iterate through all grid positions displayed in the zoom window
         for i = 0, zoomPixels - 1 do
             for j = 0, zoomPixels - 1 do
+                -- Check if there's a part at this grid position
                 local part = sim.partID(i + zoomX, j + zoomY)
 
                 if part then
