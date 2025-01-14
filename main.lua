@@ -1,3 +1,5 @@
+local dotRadius = 2
+
 event.register(event.tick, function()
     local zoomEnabled = ren.zoomEnabled()
     if zoomEnabled then
@@ -12,10 +14,10 @@ event.register(event.tick, function()
                     local originX = zWinX + zWinPxSize * i
                     local originY = zWinY + zWinPxSize * j
                     x, y = sim.partPosition(part)
-                    local drawX = originX + zWinPxSize * ((x + 0.5) % 1)
-                    local drawY = originY + zWinPxSize * ((y + 0.5) % 1)
-                    graphics.fillCircle(drawX, drawY, 2, 2, 255, 0, 0)
-                    graphics.drawCircle(drawX, drawY, 2, 2)
+                    local drawX = originX + zWinPxSize * ((x + 0.5) % 1) - dotRadius / 2
+                    local drawY = originY + zWinPxSize * ((y + 0.5) % 1) - dotRadius / 2
+                    graphics.fillCircle(drawX, drawY, dotRadius, dotRadius, 255, 0, 0)
+                    graphics.drawCircle(drawX, drawY, dotRadius, dotRadius)
                 end
             end
         end
