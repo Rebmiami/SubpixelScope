@@ -1,3 +1,5 @@
+print("Welcome to SubpixelPositionVisualizer. Press Z and look at some particles!")
+
 local dotRadius = 2
 
 event.register(event.tick, function()
