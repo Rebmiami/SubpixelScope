@@ -1,4 +1,4 @@
-print("Welcome to SubpixelPositionVisualizer. Press Z and look at some particles!")
+print("Welcome to SubpixelPositionVisualizer. Press Z and look at some particles! Press V to cycle display modes")
 
 -- Radius of position dots
 local dotRadius = 2
@@ -7,9 +7,9 @@ local dotRadiusNext = 1
 -- 0: Never draw
 -- 1: Draw only when moused over
 -- 2: Always draw
-local drawPosition = 2
-local drawNextPosition = 2
-local drawVelocityLine = 2
+local drawPosition = 0
+local drawVelocityLine = 0
+local drawNextPosition = 0
 
 event.register(event.tick, function()
     local zoomEnabled = ren.zoomEnabled()
@@ -61,3 +61,36 @@ event.register(event.tick, function()
         end
     end
 end)
+
+local currentDisplayMode
+local displayModes = {
+    {2, 0, 0, "Default"},
+    {2, 2, 0, "Velocity line"},
+    {2, 2, 2, "Next frame position"},
+    {2, 1, 1, "Next frame position (hover)"},
+    {1, 1, 1, "Hovering only"},
+}
+
+local function changeDisplayMode(newMode)
+    if displayModes[newMode] then
+        currentDisplayMode = newMode
+        drawPosition = displayModes[newMode][1]
+        drawVelocityLine = displayModes[newMode][2]
+        drawNextPosition = displayModes[newMode][3]
+        print("Display mode " .. newMode .. ": " .. displayModes[newMode][4])
+        MANAGER.savesetting("SubpixelPositionVisualizer", "displayMode", newMode)
+    else
+        print("No display mode with index " .. newMode)
+    end
+end
+changeDisplayMode(tonumber(MANAGER.getsetting("SubpixelPositionVisualizer", "displayMode") or 1))
+
+event.register(event.keypress, function(key, scan, rep, shift, ctrl, alt)
+    if not rep and key == 118 then -- V
+        if shift then
+            changeDisplayMode((currentDisplayMode - 2) % #displayModes + 1)
+        else
+            changeDisplayMode(currentDisplayMode % #displayModes + 1)
+        end
+    end
+end)  
