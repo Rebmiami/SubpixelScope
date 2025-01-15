@@ -1,4 +1,4 @@
-print("Welcome to SubpixelPositionVisualizer. Press Z and look at some particles! Press V to cycle display modes")
+print("Welcome to SubpixelScope. Press Z and look at some particles! Press V to cycle display modes")
 
 -- Radius of position dots
 local dotRadius = 2
