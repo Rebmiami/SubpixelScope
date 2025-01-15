@@ -86,7 +86,7 @@ end
 changeDisplayMode(tonumber(MANAGER.getsetting("SubpixelPositionVisualizer", "displayMode") or 1))
 
 event.register(event.keypress, function(key, scan, rep, shift, ctrl, alt)
-    if not rep and key == 118 then -- V
+    if not rep and not ctrl and key == 118 then -- V
         if shift then
             changeDisplayMode((currentDisplayMode - 2) % #displayModes + 1)
         else
