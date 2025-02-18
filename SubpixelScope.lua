@@ -29,8 +29,8 @@ event.register(event.tick, function()
                 local mouseOver = mouseX == i + zoomX and mouseY == j + zoomY
 
                 if part then
-                    x, y = sim.partPosition(part)
-                    vx, vy = sim.partProperty(part, "vx"), sim.partProperty(part, "vy")
+                    local x, y = sim.partPosition(part)
+                    local vx, vy = sim.partProperty(part, "vx"), sim.partProperty(part, "vy")
 
                     -- Translate particle position to screen space coordinates, scaled to fit the zoom window
                     local drawX = zWinX + zWinPxSize * (x - zoomX + 0.5)
